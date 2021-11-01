@@ -1,9 +1,11 @@
 import React from "react"
+import AnimalCard from "./AnimalCard"
 
-export default function AnimalsContainer(){
+export default function AnimalsContainer({animal}){
     return (
         <div>
-            "hello animals"
+            <h1>Animals</h1>
+            {animal.map(paws => <AnimalCard key={paws.id} animals={paws}/>)}
         </div>
     )
 }
