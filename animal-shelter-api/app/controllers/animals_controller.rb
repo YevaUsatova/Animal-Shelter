@@ -4,7 +4,7 @@ class AnimalsController < ApplicationController
     end
 
     post "./animal" do
-        Animal.create
+        animals = Animal.find_or_create_by(name: params[:name], species: params[:species], age: params[:age])
     end
 
     
