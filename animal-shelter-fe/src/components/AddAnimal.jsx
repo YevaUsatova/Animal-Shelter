@@ -5,7 +5,7 @@ export default function AddAnimal({addAnimal}){
     const [form, setForm]= useState({
         name: "",
         species: "",
-        age: 0
+        age: ""
     })
 
     const handleChange = (e) =>{
@@ -17,16 +17,19 @@ export default function AddAnimal({addAnimal}){
         })
     }
 
-    function handleSubmit (e) {
+    const handleSubmit= (e)=> {
         e.preventDefault()
         addAnimal(form)
     }
     return (
         <div>
             <form onSubmit={handleSubmit}>
+                <label htmlFor="name">Animals Name</label>
                 <input className= "animalsForm" name="name" onChange = {handleChange} type="text" value = {form["name"]}></input>
+                <label htmlFor="species">Animals species</label>
                 <input className= "animalsForm" name= "species" onChange = {handleChange} type="text" value = {form["species"]}></input>
-                <input className= "animalsForm" name="age" onChange = {handleChange} type="integer" value = {form["age"]}></input>
+                <label htmlFor="age">Animals Age</label>
+                <input className= "animalsForm" name="age" onChange = {handleChange} type="text" value = {form["age"]}></input>
                 <button type="submit">Save me</button>
             </form>  
         </div>

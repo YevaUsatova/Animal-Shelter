@@ -9,7 +9,8 @@ import AddAnimal from './components/AddAnimal'
 
 function App() {
   const[animal, setAnimal]= useState([])
-  //const[request, setRequest]= useState(true)
+  const[shelter, setShelter]= useState([])
+  const[request, setRequest]= useState(true)
   
   useEffect(()=> {
     fetch("http://localhost:9393/animals")
@@ -18,10 +19,19 @@ function App() {
     )
   }, [])
 
-  const newAnimal =(e) => {
-    e.preventDefault();
+  
+  useEffect(()=> {
+    fetch("http://localhost:9393/shelters")
+    .then (r=> r.json())
+    .then (data=> setShelter([...data])
+    )
+  }, [])
+ 
+  
+  const newAnimal =(data) => {
+    setRequest(true);
     let params ={
-      animals: {...animal}
+      ...data
     }
     fetch("http://localhost:9393/animal", {
       method: "POST",
@@ -30,12 +40,27 @@ function App() {
         "Content-Type": "application/jason",
       },
       body: JSON.stringify(params)
-    }).then(r => r.json())
-    .then(newData => {
+      }).then(r => r.json())
+      .then(data => {
       setAnimal(prev => {
-        return [...prev, newData]
+        return [...prev, data]
       })
+      setRequest(false)
+    })  
+  }
+
+  const handleDelete = async ( id) => {
+    setRequest(true);
+    fetch(`http://localhost:9393/animal/${id}`, {
+        method: "DELETE",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"       
+          }
     })
+    let animalAfterDelete = animal.filter(animals => animals.id !== id)
+    setAnimal([...animalAfterDelete])
+    setRequest(false);
   }
   return (
     <div>
@@ -43,8 +68,8 @@ function App() {
         <NavBar/>
         <Switch>
           <Route exact path="/"><Welcome/></Route>
-          <Route exact path= "/animal"><AnimalsContainer animal= {animal} /></Route>
-          <Route path="/shelter"><SheltersContainer/></Route>
+          <Route exact path= "/animal"><AnimalsContainer request={request} animal= {animal} handleDelete={handleDelete} /></Route>
+          <Route path="/shelter"><SheltersContainer shelter={shelter} /></Route>
           <Route  path="/animal/new"><AddAnimal addAnimal= {newAnimal}/></Route>
         </Switch>
       </Router>
@@ -53,3 +78,4 @@ function App() {
 }
 
 export default App;
+
