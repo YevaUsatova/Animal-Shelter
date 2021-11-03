@@ -36,31 +36,21 @@ function App() {
     fetch("http://localhost:9393/animal", {
       method: "POST",
       headers: {
-        "Acept": "application/json",
-        "Content-Type": "application/jason",
+        "Acepts": "Application/json",
+        "Content-Type": "Application/json",
       },
       body: JSON.stringify(params)
-      }).then(r => r.json())
-      .then(data => {
-      setAnimal(prev => {
-        return [...prev, data]
       })
+      .then(r => r.json())
+      .then(data => {
+      setAnimal([...animal, data])
       setRequest(false)
     })  
   }
 
-  const handleDelete = async ( id) => {
-    setRequest(true);
-    fetch(`http://localhost:9393/animal/${id}`, {
-        method: "DELETE",
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json"       
-          }
-    })
+  function deleteAnimal(id){
     let animalAfterDelete = animal.filter(animals => animals.id !== id)
-    setAnimal([...animalAfterDelete])
-    setRequest(false);
+    setAnimal(animalAfterDelete)
   }
   return (
     <div>
@@ -68,7 +58,7 @@ function App() {
         <NavBar/>
         <Switch>
           <Route exact path="/"><Welcome/></Route>
-          <Route exact path= "/animal"><AnimalsContainer request={request} animal= {animal} handleDelete={handleDelete} /></Route>
+          <Route exact path= "/animal"><AnimalsContainer request={request} animal= {animal} deleteAnimal={deleteAnimal} /></Route>
           <Route path="/shelter"><SheltersContainer shelter={shelter} /></Route>
           <Route  path="/animal/new"><AddAnimal addAnimal= {newAnimal}/></Route>
         </Switch>

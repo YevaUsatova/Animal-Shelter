@@ -1,13 +1,17 @@
 import React from "react"
-import { NavLink } from "react-router-dom"
 
-export default function AnimalCard({animals, handleDelete}){
+export default function AnimalCard({animals, deleteAnimal}){
+    function handleDelete( id){
+        fetch(`http://localhost:9393/animal/${id}`, {
+        method: "DELETE",
+        })
+        deleteAnimal(id)
+    }
     return (
         <div>
-            <NavLink to={`/animal/${animals.id}`}>{animals.name}</NavLink> - {animals.species} - {animals.age}
+            {animals.name} - {animals.species} - {animals.age}
             <br></br>
-            <p>Likes: {animals.likes}</p>
-            <button onClick={ handleDelete(animals.id)}>Delete</button>    
+            <button className="waves-effect waves-light btn" onClick={()=>handleDelete(animals.id)}>Delete</button>    
         </div>
     )
 }

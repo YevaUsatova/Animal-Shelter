@@ -3,18 +3,16 @@ import "./AnimalsForm.css"
 
 export default function AddAnimal({addAnimal}){
     const [form, setForm]= useState({
-        name: "",
-        species: "",
-        age: ""
+        name: " ",
+        species: " ",
+        age: " "
     })
 
-    const handleChange = (e) =>{
-        setForm ((prev) => {
-            return{
-                ...prev,
+    function handleChange (e){
+        setForm ({
+                ...form,
                 [e.target.name]: e.target.value
-            }
-        })
+           })
     }
 
     const handleSubmit= (e)=> {

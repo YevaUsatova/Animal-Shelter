@@ -2,8 +2,12 @@ import React from "react"
 
 export default function Welcome(){
     return (
-        <div>
-            "Welcome to our Animals Planet"
+        <div id="welcome">
+            <h1 id ="text">
+            Welcome to our Animals Planet...
+            <br></br>
+            Place were you can find your best friend
+            </h1>
         </div>
     )
 }

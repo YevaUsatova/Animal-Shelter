@@ -1,3 +1,6 @@
+# About this  App
+The web page is designed to show the perks of active record and React collaboration. We are making request by React commands to the active record to save changes that we are making.  
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

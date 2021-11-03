@@ -24,6 +24,20 @@
   color: white;
 }
 
+#welcome {
+  padding-top: 5%;
+  height: 550px;
+  background-image: url("https://hips.hearstapps.com/rbk.h-cdn.co/assets/17/35/1504024434-lionlead.jpg?crop=0.944xw:0.939xh;0.0561xw,0.0607xh&resize=980:*");
+  background-size: cover;
+  
+}
+
+#text {
+  text-align: center;
+  font-weight: bold;
+  color: #1c0349;
+}
+
 .App-link {
   color: #61dafb;
 }
