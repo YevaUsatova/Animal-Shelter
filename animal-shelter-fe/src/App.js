@@ -33,7 +33,7 @@ function App() {
     let params ={
       ...data
     }
-    fetch("http://localhost:9393/animal", {
+    fetch("http://localhost:9393/animals", {
       method: "POST",
       headers: {
         "Acepts": "Application/json",
@@ -48,9 +48,12 @@ function App() {
     })  
   }
 
-  function deleteAnimal(id){
+  function handleDelete(id){
+    fetch(`http://localhost:9393/animal/${id}`, {
+        method: "DELETE",
+    })
     let animalAfterDelete = animal.filter(animals => animals.id !== id)
-    setAnimal(animalAfterDelete)
+    setAnimal(animalAfterDelete)  
   }
   return (
     <div>
@@ -58,7 +61,7 @@ function App() {
         <NavBar/>
         <Switch>
           <Route exact path="/"><Welcome/></Route>
-          <Route exact path= "/animal"><AnimalsContainer request={request} animal= {animal} deleteAnimal={deleteAnimal} /></Route>
+          <Route exact path= "/animal"><AnimalsContainer request={request} animal= {animal} handleDelete={handleDelete} /></Route>
           <Route path="/shelter"><SheltersContainer shelter={shelter} /></Route>
           <Route  path="/animal/new"><AddAnimal addAnimal= {newAnimal}/></Route>
         </Switch>

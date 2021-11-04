@@ -1,12 +1,7 @@
 import React from "react"
 
-export default function AnimalCard({animals, deleteAnimal}){
-    function handleDelete( id){
-        fetch(`http://localhost:9393/animal/${id}`, {
-        method: "DELETE",
-        })
-        deleteAnimal(id)
-    }
+export default function AnimalCard({animals, handleDelete}){
+    
     return (
         <div>
             {animals.name} - {animals.species} - {animals.age}
